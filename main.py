@@ -139,20 +139,24 @@
 # #         else:
 # #             print("they are not palindrome")
 #
-
-
-
-
+from traceback import print_exc
 
 # ლექსიკონი ან (ობიექტები JSში)!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 print("dictionary(objects in JS)")
-
 myDict = {
     1 : 1**2,
     "name" : "malkhaz"
 }
 print(myDict[1])
 print(myDict["name"])
+
+# ლექსიკონებს არ გააჩნიათ ინდექსააცია, მაგრამ, თუკი სეიბს გამოვიყენებთ ლექსიკონში,
+# სიებზე ინდექსაცით შევძლებთ წვდომის განხორციელებას რადგანაც სიებს გააჩნიათ ინდექსაცია:
+
+# hash ჰეშირება: ჰეშირება, როცა ინფორმაციის შენახვა ხდება, key : value, პრინციპით,
+# keyების ჰეშირება ხდება, რათა საჭიროების შემთხვევაში გამოვიძახოთ keyები,
+# რადგანაც ლექსიკონებს ინდექსაცია არ გააჩნიათ, ლექსიკონებიდან ელემენტების გამოძახება ხდება keyების საშუალებით ლექსიკონებიდან ელემენტების გამოსატანად
+
 
 
 # dictioary{ლექსიკონი} : სინტაქსი:
@@ -169,7 +173,7 @@ dict = {
 # ისინი ერთმანეთისგან გამოიყოფა მძიმით,
 
 # მათი გამოძახება კი ხდება key ის სახელის გამოძახებით,
-# print(dict[1])
+print(dict["name"])
 # ინდექსაციით ვერ გამოვიძახებთ რადგანაც არ აქვთ ინდექსაცია / ამიტომ უნდა გამოვიძახოთ keyების დახმარებით
 
 # შეგვიძლია keyში ახალი ობიექტი ჩავსვათ და ა შ...
@@ -197,6 +201,7 @@ print(dictInDict["states"]["west"])
 # ობიეტის სახელი და [] კვადრატულ ფრჩხილის შიგნით ვწერთ keyსახელს
 
 
+
 # რამდენიმე ინფორმაცია keyში
 familyTree = {
     "motherland" : {
@@ -222,21 +227,109 @@ listInDict = {
     ],
     "motorcycles" : [
         "kawasaki",
-        "hraley"
+        "hraley",
         "honda"
     ]
 }
 print(listInDict["car"][1])
-# ლექსიკონებს არ გააჩნიათ ინდექსააცია, მაგრამ, თუკი სეიბს გამოვიყენებთ ლექსიკონში, სიებზე ინდექსაცით შევძლებთ წვდომის განხორციელებას
+for i in listInDict:
+    print(listInDict[i][1])
 
 
-
-
-
+# ცარიელი ლექსიკონი და ინფორმაციის შეყვანა
 emptyDict = {}
-for i in range(1,11):
-    emptyDict[i] = i ** 2
+for i in range(1, 11):
+    emptyDict[i] = i
 print(emptyDict)
+
+# დიქტების გენერატორი : !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# ისეთივე სინტაქსი აქვს როგორ ლლისტის გენერატორს:
+nums = {i:i**2 for i in range(1, 11) if i % 2 == 0}
+print(nums)
+
+
+# ჩადგმული დიქტები
+
+
+
+
+
+
+
+
+
+
+
+# მეთოდები ლექსიკონებში: მეთოდი არის წერთილით" . " ით რომ ვიძახებთ
+
+
+# .get() - გადაეცემა key, და გამოიტანს გადაცემული key-ს მნიშვნელობას
+dict1 = {
+    "name" : "malkhaz",
+    "lastname" : "okriashvili",
+    "nationality" : "georigain",
+    "age" : 21,
+    "profession" : "support associate",
+    "student" : True,
+    "school" : "it step",
+    "subject" : "python development"
+}
+print(dict1.get("name"))
+dict1["names"] = "nika"
+print(dict1.get("names"))
+# შეგვიძლია მნიშვნელობის შეცვლა, დიქტში key გავუტოლოთ სხვა ელემენტს, რითიც გვინდა რომ მნიშვნელობა მივანიჭოთ 
+# keys() - ყველა keyს გამოიტანს
+# print(dict1.keys())
+#
+
+tree = {
+    "a" : {
+       "b" : {
+           "age" : 20,
+           "name" : "malkhaz",
+           "lastname" : "okriashvili",
+            },
+        },
+    }
+print(tree["a"].get("b"))
+
+
+student = {
+    "name" : "malkhaz",
+    "lastname" : "okriashvili",
+    "age" : 21,
+    "subject" : "python development",
+    "grades" : [12, 12, 12, 8, 10, 3, 7],
+}
+value = student.values()
+print(value)
+for key in student:
+    print(student[key])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -263,74 +356,63 @@ products = [
         "quantity": 5
     }}
 ]
-total = 0
+# ა. დაბეჭდეთ ყველა პროდუქტის დასახელება:
 for i in products:
     for j in i:
+
         name = i[j]
-        print(f"products names are:{j}")
         price = name["price"]
-        quantity = name["quantity"]
-        total += price * quantity
-print(f"total is: {total}")
+        # print(price)
 
 
 
 
-# დაწერეთ პროგრამა, რომელიც მომხმარებელს შეეკითხება ხილის სახელს, მანამ სანამ, მომხმარებელი არ შეიყვანს სიტყვას stop,
+        print(name)
+
+
+        # name = j
+        # price = name["price"]
+        # name["quantity"] = quantity
+        # print(price)
+
+
+
+
+# ბ. გამოითვალეთ ყველა პროდუქტის ღირებულების ჯამი(ანუ პროდუქტის ფასი უნდა გაამრავლოთ რაოდენობაზე და დააჯამოთ)
+
+
+
+
+
+
+
+
+
+
+#  დაწერეთ პროგრამა, რომელიც მომხმარებელს შეეკითხება ხილის სახელს, მანამ სანამ, მომხმარებელი არ შეიყვანს სიტყვას stop,
 #    ამის შემდეგ გამოიტანეთ დიქტის სახით ხილის დასახელება და ველიუ იქნება რამდენჯერაც შეიყვანა ეს ხილი, მაგალითად:
-fruits = {}
-while True:
-    fruit = input("Enter your favoriute fruit: ")
-    if fruit in fruits:
-        fruits[fruit] += 1
-    elif fruit == "stop":
-        break
-    else:
-        fruits[fruit] = 1
-print(fruits)
-   # Enter your favorite fruit: banana
-   # Enter your favorite fruit: apple
-   # Enter your favorite fruit: banana
-   # Enter your favorite fruit: stop
-
+#
+#    Enter your favorite fruit: banana
+#    Enter your favorite fruit: apple
+#    Enter your favorite fruit: banana
+#    Enter your favorite fruit: stop
+#
 # შედეგი:
 
-{'banana': 2, 'apple': 1}
-
-
-
-
-
-
-
-# დაწერეთ პროგრამა, რომელიც მომხმარებელს შეეკითხება ხილის სახელს, მანამ სანამ, მომხმარებელი არ შეიყვანს სიტყვას stop,
-#    ამის შემდეგ გამოიტანეთ დიქტის სახით ხილის დასახელება და ველიუ იქნება რამდენჯერაც შეიყვანა ეს ხილი, მაგალითად:
-fruits = {}
-fruit_name = input("Enter your fruit name: ")
-
+empty_fruit_dict = {}
 while True:
-    if fruit_name == "stop":
+    fruit = input("enter fruit name: ")
+    # empty_fruit_dict = {}
+
+    if fruit == "stop":
         break
-    elif fruit_name in fruits:
-        fruits[fruit_name] += 1
+
+
+    if fruit in empty_fruit_dict:
+        empty_fruit_dict[fruit] = empty_fruit_dict[fruit] + 1
     else:
-        fruits[fruit_name] = 1
-print(fruits)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        empty_fruit_dict[fruit] = 1
+print(empty_fruit_dict)
 
 
 
